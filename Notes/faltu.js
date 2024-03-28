@@ -343,3 +343,20 @@
                 
 
 
+console.log(`start`);
+
+const sub = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        const result  = true;
+        if(result) resolve(`Promise is resolved !`);
+        else reject(new Error(`This promise is not resolved`));
+    }, 1000);
+});
+
+// Using an async function to await the resolution of the promise
+(async () => {
+    console.log(await sub); // Using await to log the resolved value
+})();
+
+
+console.log('Stop');

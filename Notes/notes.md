@@ -109,3 +109,135 @@ Now with the help of the callback the output of the code will be :-
 First
 Third
 current logged in user : Alfa
+
+# callback -hell or Pyramid of doom
+
+```js
+
+console.log(`Start`);
+
+function watchTheVideo(username, cb) {
+  setTimeout(() => {
+    cb(`${username} will watch the video `);
+  }, 1000);
+}
+
+function likeTheVideo(video, cb) {
+  setTimeout(() => {
+    cb(`Like  the ${video} video `);
+  }, 1000);
+}
+
+function shareTheVideo(video, cb) {
+  setTimeout(() => {
+    cb(`Share  the ${video} video `);
+  }, 1000);
+}
+
+function commentTheVideo(video, cb) {
+  setTimeout(() => {
+    cb(`comment  the ${video} video `);
+  }, 1000);
+}
+
+watchTheVideo(`Alfa`, function (message) {
+  console.log(message);
+  likeTheVideo(`video name `, (action) => {
+    console.log(action);
+    shareTheVideo("Share video name ", (action) => {
+      console.log(action);
+      commentTheVideo("comment name ", (action) => {
+        console.log(action);
+      });
+    });
+  });
+});
+
+console.log(`End`);
+
+```
+
+Above mention is the example of the callback hell, As nesting of the code is done above. And it is hard to read.
+So in order to resolve this `PROMISE` was introduced in js
+
+
+# Promises
+
+
+There are 3 states of promises as:-
+1. Pending: The initial state of a promise.
+2. Fullfilled: The state of a promise representing a successful operation.
+3. Reject: The state of a promise representing a failed operation. Once a promise is fulfilled or rejected, it is immutable (i.e. it can never change again).
+
+```js
+
+console.log(`start`);
+
+const sub = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        const result  = true;
+        if(result) resolve(`Promise is resolved !`)
+        else reject(new Error(`This promise is not resolved`))
+    }, 2000)
+})
+
+// This is how promise is run with the help of then and catch
+sub. 
+then((res) => {
+    console.log(res)
+})
+.catch((err)=> {
+    console.error(err)
+})
+
+
+console.log('Stop');
+
+
+```
+
+
+```js
+
+let a = 10;
+
+function multiply(x) {
+  return x * 10
+}
+
+let b = multiply(a)
+
+console.log(b)
+
+```
+# Js execution context
+js execution context has the 2 phases:-
+1. Createion Phase
+2. Execution Phase
+
+creation Phase:-
+1. Global or window object
+2. setup the memory heap for storing the variable and function referances
+3. It initialises the function and variable with undefined
+
+a = undefined
+multiply() { }
+b = undefined
+
+
+Execution Phase:
+During the execution phase the JS engine execute the code line by line assigne the values to the variable and execute the functions call
+
+a = 10;
+b = 100;
+
+
+# hoisting
+
+JavaScript Hoisting refers to the process whereby the interpreter appears to move the declaration of functions, variables or classes to the top of their scope, prior to execution of the code.
+
+Hoisting allows functions to be safely used in code before they are declared.
+
+Example 01: Function Hoisting
+
+Temporal debt zone: variable are in the scope, but they are not declared yet, is the reason why hoisting is possible in let and const.
